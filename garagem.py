@@ -88,4 +88,32 @@ def atualizar_carro(id_carro, modelo=None, ano=None, cor=None, potencia=None):
 
 
 def remover_carro(id_carro):
-    pass
+    try:
+        conexao = sqlite3.connect("garagem.db")
+        cursor = conexao.cursor()
+
+        cursor.execute("DELETE FROM carros WHERE id = ?", (id_carro))
+
+        conexao.commit()
+        print(f"Carro ID {id_carro} removido com suscesso!")
+    except sqlite3.Error as e:
+        print(f"Erro ao remover carro {e}")
+    finally:
+        conexao.close()
+
+#adicionando alguns carros
+
+# adicionar_carro("Corsa", "Preto Liszt", 2000, 60)
+# adicionar_carro("Eclipse", "Vermelho", 1998, 195)
+# adicionar_carro("Nivus", "Azul Turbo", 2025, 128)
+# adicionar_carro("Galaxie", "Vermelho", 1978, 130)
+# adicionar_carro("Brasilia", "Amarela", 1990, 50)
+# adicionar_carro("Uno", "Preto", 1999, 55)
+
+listar_carros()
+
+
+
+
+
+
